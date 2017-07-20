@@ -235,9 +235,6 @@
                     <a href="#create-group" class="toc-h2 toc-link" data-title="Groups">Create group</a>
                   </li>
                   <li>
-                    <a href="#update-grpup" class="toc-h2 toc-link" data-title="Groups">Update grpup</a>
-                  </li>
-                  <li>
                     <a href="#invite-a-user-to-a-group" class="toc-h2 toc-link" data-title="Groups">Invite a user to a group</a>
                   </li>
                   <li>
@@ -409,22 +406,45 @@
 </ul>
 <h2 id='create-group'>Create group</h2>
 <blockquote>
+<p>Create Group Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
+  https://app.sunlight.is/api/groups <span class="se">\</span>
+  -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "data": {
+    "attributes": {
+      "name": "Sunlight",
+      "address": "Planet Earth",
+      "about-url": "https://sunlight.is",
+      "bio": "Give Sunlight to employees, friends and family for them to spend on education."
+      "privacy-setting": "admin-invite",
+      "manager-approval": true
+    }
+  }
+}'</span>
+</code></pre>
+<blockquote>
 <p>The json response encoded looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"groups"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"806b946cf5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"806b946cf5"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sunlight"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Planet Earth"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Give Sunlight to employees, friends and family for them to spend on education."</span><span class="p">,</span><span class="w">
       </span><span class="s2">"avatar-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"cover-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"about-url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://facebook.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"about-url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sunlight.is"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"privacy-setting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin-invite"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"manager-approval"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"manager-approval"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-20T15:19:04.416Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"slack-config-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="s2">"slack-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -444,12 +464,12 @@
 <aside class="notice">
   Note that a group will always have at least one user associated, at the time of creating a group will automatically be a member and administrator.
 </aside>
-<h3 id='attributes'>Attributes</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <p>The table below shows the fields you can create for a group</p>
 
 <table><thead>
 <tr>
-<th>Attribute</th>
+<th>Parameter</th>
 <th>Required</th>
 <th>Description</th>
 </tr>
@@ -500,68 +520,7 @@
 <td>The number of users in the group</td>
 </tr>
 </tbody></table>
-<h2 id='update-grpup'>Update grpup</h2><h2 id='invite-a-user-to-a-group'>Invite a user to a group</h2><h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The command above returns a structured JSON like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1><h2 id='get-orders-of-a-user'>Get orders of a user</h2><h2 id='get-orders-of-a-group'>Get orders of a group</h2><h1 id='errors'>Errors</h1>
+<h2 id='invite-a-user-to-a-group'>Invite a user to a group</h2><h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1><h2 id='get-orders-of-a-user'>Get orders of a user</h2><h2 id='get-orders-of-a-group'>Get orders of a group</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
 <p>The Kittn API uses the following error codes:</p>
