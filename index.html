@@ -202,7 +202,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,9 +213,6 @@
       <img src="images/logo.svg" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -229,16 +226,44 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#groups" class="toc-h1 toc-link" data-title="Groups">Groups</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Kittens">Get All Kittens</a>
+                    <a href="#group-model" class="toc-h2 toc-link" data-title="Groups">Group Model</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Kittens">Get a Specific Kitten</a>
+                    <a href="#create-group" class="toc-h2 toc-link" data-title="Groups">Create group</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Kittens">Delete a Specific Kitten</a>
+                    <a href="#update-grpup" class="toc-h2 toc-link" data-title="Groups">Update grpup</a>
+                  </li>
+                  <li>
+                    <a href="#invite-a-user-to-a-group" class="toc-h2 toc-link" data-title="Groups">Invite a user to a group</a>
+                  </li>
+                  <li>
+                    <a href="#edit-budget-of-an-individual-user" class="toc-h2 toc-link" data-title="Groups">Edit budget of an individual user</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#activities" class="toc-h1 toc-link" data-title="Activities">Activities</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-activities-of-a-user" class="toc-h2 toc-link" data-title="Activities">Get activities of a user</a>
+                  </li>
+                  <li>
+                    <a href="#get-activities-of-a-group" class="toc-h2 toc-link" data-title="Activities">Get activities of a group</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-orders-of-a-user" class="toc-h2 toc-link" data-title="Orders">Get orders of a user</a>
+                  </li>
+                  <li>
+                    <a href="#get-orders-of-a-group" class="toc-h2 toc-link" data-title="Orders">Get orders of a group</a>
                   </li>
               </ul>
           </li>
@@ -260,35 +285,222 @@
 <p>The api is organized around REST and was built under the <a href="http://jsonapi.org/">JSON API</a> specifications, for this reason our api requires the use of the JSON API media type <a href="https://www.iana.org/assignments/media-types/application/vnd.api+json">application/vnd.api+json</a> for exchanging data.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Authentication using HTTP basic auth.</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
+        -u <span class="o">{</span>key<span class="o">}</span>:
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Alternatively pass a Bearer token in an Authorization header.</p>
 </blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
+        -H <span class="s1">'Authorization: Bearer {key}'</span>
+</code></pre>
+<p>Authentication is done through the API key that will be provided by sunlight support.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Requests are authenticated using HTTP Basic Auth. Provide your API key as the basic auth username. You do not need to provide a password.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Alternatively you can also pass your API key as a bearer token in an Authorization header.</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>You can see your account’s API keys, and roll them if necessary, in the dashboard.</p>
+<h1 id='groups'>Groups</h1>
+<p>The groups help you organize better the users in sunlight, they allow you to monitor what the members are learning and know what they are spending their sunlights.</p>
+<h2 id='group-model'>Group Model</h2>
+<blockquote>
+<p>Example Group Object</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"806b946cf5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sunlight"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Planet Earth"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"about-url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sunlight.is"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"manager-approval"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"privacy-setting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin-invite"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"avatar-url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sunlight-production-beanstalk.s3.amazonaws.com/avatar.jpeg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cover-url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sunlight-production-beanstalk.s3.amazonaws.com/cover.jpeg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number-of-members"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-20T15:19:04.416Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-20T15:19:04.416Z"</span><span class="p">,</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>A group object contains the following fields</em></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td><strong>string</strong></td>
+<td>The sunlight defined id representing the group</td>
+</tr>
+<tr>
+<td>name</td>
+<td><strong>string</strong></td>
+<td>The name of the group</td>
+</tr>
+<tr>
+<td>address</td>
+<td><strong>string</strong></td>
+<td>The address of the group</td>
+</tr>
+<tr>
+<td>bio</td>
+<td><strong>string</strong></td>
+<td>A short description of the group</td>
+</tr>
+<tr>
+<td>abour-url</td>
+<td><strong>string</strong></td>
+<td>Url for the group&#39;s website.</td>
+</tr>
+<tr>
+<td>manager-approval</td>
+<td><strong>boolean</strong></td>
+<td>if the orders requieres manager approval</td>
+</tr>
+<tr>
+<td>privacy-setting</td>
+<td><strong>string</strong></td>
+<td>Group privacy type</td>
+</tr>
+<tr>
+<td>avatar-url</td>
+<td><strong>string</strong></td>
+<td>Avatar url of the group</td>
+</tr>
+<tr>
+<td>cover-url</td>
+<td><strong>string</strong></td>
+<td>Cover url of the group</td>
+</tr>
+<tr>
+<td>number-of-members</td>
+<td><strong>integer</strong></td>
+<td>The number of users in the group</td>
+</tr>
+<tr>
+<td>created-at</td>
+<td><strong>timestamp</strong></td>
+<td>The time the group was added to Sunlight</td>
+</tr>
+<tr>
+<td>updated-at</td>
+<td><strong>timestamp</strong></td>
+<td>The time the group was updated to Sunlight</td>
+</tr>
+</tbody></table>
+<h3 id='privacy-settings'>privacy-settings:</h3>
+<p>You can choose to allow people to join your group anytime, have them request invites or only allow them to join by an admin’s invitation.</p>
+
+<ul>
+<li><code>admin-invite</code>: People are joined by an invitation from the group admin <strong><em>(Avaiable)</em></strong></li>
+<li><code>public_access</code>: People can join your group anytime <strong><em>(No avaible)</em></strong></li>
+<li><code>request_invite</code>: People request invite to join a group <strong><em>(No avaible)</em></strong></li>
+</ul>
+<h3 id='manager-approval'>manager-approval</h3>
+<ul>
+<li><code>true</code>: if you’d like every spending order that uses funds from this group to require approval from a group admin.</li>
+<li><code>false</code>: if you wouldn&#39;t like every spending order that uses funds from this group to require approval from a group admin.</li>
+</ul>
+<h2 id='create-group'>Create group</h2>
+<blockquote>
+<p>The json response encoded looks like:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"groups"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"806b946cf5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"806b946cf5"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"avatar-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"cover-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"about-url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://facebook.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"privacy-setting"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin-invite"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"manager-approval"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-20T15:19:04.416Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"slack-config-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"slack-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"slack-token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"number-of-members"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/groups/806b946cf5"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Groups can be created via a <code>POST</code> to <code>https://sunlight.is/api/groups</code>, which accepts a JSON object describing the group.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+  Note that a group will always have at least one user associated, at the time of creating a group will automatically be a member and administrator.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='attributes'>Attributes</h3>
+<p>The table below shows the fields you can create for a group</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>yes</td>
+<td>The name of the group</td>
+</tr>
+<tr>
+<td>address</td>
+<td>no</td>
+<td>The address of the group</td>
+</tr>
+<tr>
+<td>bio</td>
+<td>no</td>
+<td>A short description of the group</td>
+</tr>
+<tr>
+<td>abour-url</td>
+<td>no</td>
+<td>Url for the group&#39;s website.</td>
+</tr>
+<tr>
+<td>manager-approval</td>
+<td>no</td>
+<td>if the orders requieres manager approval</td>
+</tr>
+<tr>
+<td>privacy-setting</td>
+<td>yes</td>
+<td>Group privacy type</td>
+</tr>
+<tr>
+<td>avatar-url</td>
+<td>no</td>
+<td>Avatar url of the group</td>
+</tr>
+<tr>
+<td>cover-url</td>
+<td>no</td>
+<td>Cover url of the group</td>
+</tr>
+<tr>
+<td>number-of-members</td>
+<td>no</td>
+<td>The number of users in the group</td>
+</tr>
+</tbody></table>
+<h2 id='update-grpup'>Update grpup</h2><h2 id='invite-a-user-to-a-group'>Invite a user to a group</h2><h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -349,89 +561,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The command above returns a structured JSON like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The command above returns a structured JSON like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
+<h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1><h2 id='get-orders-of-a-user'>Get orders of a user</h2><h2 id='get-orders-of-a-group'>Get orders of a group</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
 <p>The Kittn API uses the following error codes:</p>
@@ -492,9 +622,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
