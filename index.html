@@ -221,6 +221,11 @@
       <div id="toc" class="toc-list-h1">
           <li>
             <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-parameters" class="toc-h2 toc-link" data-title="Overview">Query parameters</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
@@ -257,10 +262,7 @@
             <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-orders-of-a-user" class="toc-h2 toc-link" data-title="Orders">Get orders of a user</a>
-                  </li>
-                  <li>
-                    <a href="#get-orders-of-a-group" class="toc-h2 toc-link" data-title="Orders">Get orders of a group</a>
+                    <a href="#list-orders" class="toc-h2 toc-link" data-title="Orders">List orders</a>
                   </li>
               </ul>
           </li>
@@ -279,7 +281,18 @@
         <h1 id='overview'>Overview</h1>
 <p>Welcome to Sunlight&#39;s API! Use our api to create groups, invite users to a group, see the activities of a group&#39;s users and many other things.</p>
 
-<p>The api is organized around REST and was built under the <a href="http://jsonapi.org/">JSON API</a> specifications, for this reason our api requires the use of the JSON API media type <a href="https://www.iana.org/assignments/media-types/application/vnd.api+json">application/vnd.api+json</a> for exchanging data.</p>
+<p>The api is organized around REST and was built under the <a href="http://jsonapi.org/">JSON API</a> specifications.</p>
+
+<p>Send your pull-requests to <a href="https://github.com/jalagrange/slate"><code>https://github.com/jalagrange/slate</code></a></p>
+<h2 id='query-parameters'>Query parameters</h2>
+<p>All routes support query parameters to refine responses</p>
+
+<ul>
+<li><p><a href="http://jsonapi.org/format/#fetching-relationships"><strong>include</strong></a>, e.g. <code>GET /api/v2/orders?include=category</code> to include properties of the order relationship</p></li>
+<li><p><a href="http://jsonapi.org/format/#fetching-sorting"><strong>sort</strong></a>, e.g. <code>GET /api/v2/orders?sort=name</code> to sort all accounts ascending by name</p></li>
+<li><p><a href="http://jsonapi.org/format/#fetching-pagination"><strong>page</strong></a>, e.g. <code>GET /api/v2/orders?page[number]=1&amp;page[size]=10</code> to return only the first 10 orders</p></li>
+<li><p><a href="http://jsonapi.org/format/#fetching-filtering"><strong>filter</strong></a>, The <code>filter</code> is not defined by JSON API. Implementations must specify if how the <code>filter</code> query parameter is supported.</p></li>
+</ul>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>Authentication using HTTP basic auth.</p>
@@ -464,7 +477,7 @@
 <aside class="notice">
   Note that a group will always have at least one user associated, at the time of creating a group will automatically be a member and administrator.
 </aside>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <p>The table below shows the fields you can create for a group</p>
 
 <table><thead>
@@ -527,20 +540,20 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
   http://localhost:4000/api/v2/group-invitations <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer 7526dddcca29fde58b2e93e921bfe7d74a78c5a9fe2751d0e66f2660c0489022'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
   "data": {
-  "attributes": {
-    "email": "jose@sunlight.is"
-  },
-  "relationships": {
-    "group": {
-      "data": {
-        "id": "9030927d27" 
+    "attributes": {
+      "email": "jose@sunlight.is"
+    },
+    "relationships": {
+      "group": {
+        "data": {
+          "id": "9030927d27" 
+        }
       }
     }
-  }
   }
 }'</span>
 </code></pre>
@@ -571,7 +584,7 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
   http://localhost:4000/api/v2/group-users <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer 7526dddcca29fde58b2e93e921bfe7d74a78c5a9fe2751d0e66f2660c0489022'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'postman-token: 648830e0-0f0e-5d35-93ab-b7fd494c8d61'</span> <span class="se">\</span>
@@ -667,7 +680,135 @@
 <td>Group&#39;s id which the user will be joining</td>
 </tr>
 </tbody></table>
-<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1><h2 id='get-orders-of-a-user'>Get orders of a user</h2><h2 id='get-orders-of-a-group'>Get orders of a group</h2><h1 id='errors'>Errors</h1>
+<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1>
+<p>Overview orders</p>
+<h2 id='list-orders'>List orders</h2>
+<blockquote>
+<p>List orders - Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
+  http://localhost:4000/api/v2/orders <span class="se">\</span>
+  -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>The json response encoded looks like:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1d7986fed6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1d7986fed6"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silent Child"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.amazon.co.uk/Silent-Child-Sarah-Denzil-ebook/dp/B01MUDRSND/ref=sr_1_1?ie=UTF8"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amazon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"delivery-email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"juan@sunlight.is"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T15:45:22.224Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T20:30:07.969Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T18:50:36.190Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-cvv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-expiration-month"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-expiration-year"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/orders/1d7986fed6"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a5cdf56821"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a5cdf56821"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Platzi Subscription"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://platzi.com/comprar/mensual/?course=todos"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Platzi"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"delivery-email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gabriel@sunlight.is"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Venezuela"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06T16:38:18.516Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T20:30:11.260Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06T16:39:38.110Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-cvv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-expiration-month"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"card-expiration-year"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/orders/a5cdf56821"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"total-open"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-waiting"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-waiting-manager-approval"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-approved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-manager-approved"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-payment-method-issued"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-completed"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-cancelled"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total-refunded"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=0&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=2&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=2&amp;page[size]=10"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>You can fetch a list of orders via a <code>GET</code> to <code>https://sunlight.is/api/v2/orders</code>. The order list is sorted by the <code>updated-at</code> field and by default is ordered descending, most recently updated first.</p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page[number]</td>
+<td>no</td>
+<td>What page of results to fetch defaults to first page.</td>
+</tr>
+<tr>
+<td>page[size]</td>
+<td>no</td>
+<td>How many results per page defaults to 10, max is 50.</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>no</td>
+<td>what field to sort the results by. Valid values: <code>name</code>, <code>created-at</code>, <code>update-at</code>, <code>total</code>, <code>status</code>, <code>provider</code></td>
+</tr>
+<tr>
+<td>filter</td>
+<td>no</td>
+<td>The filter query parameter is reserved for filtering data. Valid Values: <code>group-id</code>, <code>received-by</code>, <code>status</code></td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
 <p>The Kittn API uses the following error codes:</p>
