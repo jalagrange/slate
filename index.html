@@ -284,13 +284,13 @@
 <blockquote>
 <p>Authentication using HTTP basic auth.</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
         -u <span class="o">{</span>key<span class="o">}</span>:
 </code></pre>
 <blockquote>
 <p>Alternatively pass a Bearer token in an Authorization header.</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
         -H <span class="s1">'Authorization: Bearer {key}'</span>
 </code></pre>
 <p>Authentication is done through the API key that will be provided by sunlight support.</p>
@@ -520,7 +520,154 @@
 <td>The number of users in the group</td>
 </tr>
 </tbody></table>
-<h2 id='invite-a-user-to-a-group'>Invite a user to a group</h2><h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1><h2 id='get-orders-of-a-user'>Get orders of a user</h2><h2 id='get-orders-of-a-group'>Get orders of a group</h2><h1 id='errors'>Errors</h1>
+<h2 id='invite-a-user-to-a-group'>Invite a user to a group</h2>
+<blockquote>
+<p>Invite unregistered user to Group - Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
+  http://localhost:4000/api/v2/group-invitations <span class="se">\</span>
+  -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer 7526dddcca29fde58b2e93e921bfe7d74a78c5a9fe2751d0e66f2660c0489022'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "data": {
+  "attributes": {
+    "email": "jose@sunlight.is"
+  },
+  "relationships": {
+    "group": {
+      "data": {
+        "id": "9030927d27" 
+      }
+    }
+  }
+  }
+}'</span>
+</code></pre>
+<blockquote>
+<p>The json response encoded looks like:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group-users"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a910564e67"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a910564e67"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"administrator"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/group-users/a910564e67"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Invite registered user to Group - Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
+  http://localhost:4000/api/v2/group-users <span class="se">\</span>
+  -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer 7526dddcca29fde58b2e93e921bfe7d74a78c5a9fe2751d0e66f2660c0489022'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -H <span class="s1">'postman-token: 648830e0-0f0e-5d35-93ab-b7fd494c8d61'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "data": {
+    "attributes": {
+      administrator: false
+    },
+    "relationships": {
+      "user": {
+        "data": {
+          "id": "54a4759f2c"
+        }  
+      },
+      "group": {
+        "data": {
+          "id": "9030927d27" 
+        }
+      }
+    }
+  }
+}'</span>
+</code></pre>
+<blockquote>
+<p>The json response encoded looks like:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group-users"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"832a222ad8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"832a222ad8"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"administrator"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/group-users/832a222ad8"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The groups allow you to invite registered and unregistered users in sunglight, to each case there are different params and different endpoints.</p>
+
+<aside class="notice">
+  You can only invite users to groups where you are an admin.
+</aside>
+<h3 id='to-unregistered-users'>To unregistered users</h3>
+<p>via a <code>POST</code> to <code>https://sunlight.is/api/group-invitations</code>, which accepts a JSON object.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>yes</td>
+<td>The email of the user you want to invite</td>
+</tr>
+<tr>
+<td>relationships[group][id]</td>
+<td>yes</td>
+<td>Group id which the user will be joining to.</td>
+</tr>
+</tbody></table>
+<h3 id='to-registered-users'>To registered users</h3>
+<p>via a <code>POST</code> to <code>https://sunlight.is/api/group-users</code>, which accepts a JSON object.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>administrator</td>
+<td>yes</td>
+<td>true if you want the user to be group admin</td>
+</tr>
+<tr>
+<td>relationships[user][id]</td>
+<td>yes</td>
+<td>User&#39;s id of the user you want to invite</td>
+</tr>
+<tr>
+<td>relationships[group][id]</td>
+<td>yes</td>
+<td>Group&#39;s id which the user will be joining</td>
+</tr>
+</tbody></table>
+<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1><h2 id='get-orders-of-a-user'>Get orders of a user</h2><h2 id='get-orders-of-a-group'>Get orders of a group</h2><h1 id='errors'>Errors</h1>
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
 <p>The Kittn API uses the following error codes:</p>
