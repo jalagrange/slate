@@ -248,6 +248,14 @@
               </ul>
           </li>
           <li>
+            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-orders" class="toc-h2 toc-link" data-title="Orders">List orders</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#activities" class="toc-h1 toc-link" data-title="Activities">Activities</a>
               <ul class="toc-list-h2">
                   <li>
@@ -255,14 +263,6 @@
                   </li>
                   <li>
                     <a href="#get-activities-of-a-group" class="toc-h2 toc-link" data-title="Activities">Get activities of a group</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#list-orders" class="toc-h2 toc-link" data-title="Orders">List orders</a>
                   </li>
               </ul>
           </li>
@@ -477,7 +477,7 @@
 <aside class="notice">
   Note that a group will always have at least one user associated, at the time of creating a group will automatically be a member and administrator.
 </aside>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <p>The table below shows the fields you can create for a group</p>
 
 <table><thead>
@@ -680,7 +680,7 @@
 <td>Group&#39;s id which the user will be joining</td>
 </tr>
 </tbody></table>
-<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='orders'>Orders</h1>
+<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='orders'>Orders</h1>
 <p>Overview orders</p>
 <h2 id='list-orders'>List orders</h2>
 <blockquote>
@@ -779,7 +779,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>You can fetch a list of orders via a <code>GET</code> to <code>https://sunlight.is/api/v2/orders</code>. The order list is sorted by the <code>updated-at</code> field and by default is ordered descending, most recently updated first.</p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -814,17 +814,31 @@
 
   Every user can see all of their orders and the ones associated to the groups which said user is admin.
 </aside>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='errors'>Errors</h1>
+<p>The Sunlight API uses the following error codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>Code</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>200</td>
+<td>Ok -- The request was successful.</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created -- The resource was successfully created.</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accept -- The resource was asynchronously created</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content - The server successfully processed the request and is not returning any content.</td>
+</tr>
 <tr>
 <td>400</td>
 <td>Bad Request -- Your request sucks.</td>
@@ -835,31 +849,15 @@
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The requested is hidden for administrators only.</td>
 </tr>
 <tr>
 <td>404</td>
 <td>Not Found -- The specified kitten could not be found.</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>422</td>
+<td>Unprocessable Entity -- The request was well-formed but was unable to be followed due to semantic errors.</td>
 </tr>
 <tr>
 <td>500</td>
