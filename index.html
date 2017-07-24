@@ -251,6 +251,9 @@
             <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#order-model" class="toc-h2 toc-link" data-title="Orders">Order Model</a>
+                  </li>
+                  <li>
                     <a href="#list-orders" class="toc-h2 toc-link" data-title="Orders">List orders</a>
                   </li>
               </ul>
@@ -334,7 +337,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>uid</td>
+<td>id</td>
 <td><strong>string</strong></td>
 <td>The sunlight defined id representing the group</td>
 </tr>
@@ -355,7 +358,7 @@
 </tr>
 <tr>
 <td>abour-url</td>
-<td><strong>string</strong></td>
+<td><strong>strin g</strong></td>
 <td>Url for the group&#39;s website.</td>
 </tr>
 <tr>
@@ -517,11 +520,6 @@
 <td>no</td>
 <td>Cover url of the group</td>
 </tr>
-<tr>
-<td>number-of-members</td>
-<td>no</td>
-<td>The number of users in the group</td>
-</tr>
 </tbody></table>
 <h2 id='invite-a-user-to-a-group'>Invite a user to a group</h2>
 <blockquote>
@@ -672,6 +670,131 @@
 </tbody></table>
 <h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='orders'>Orders</h1>
 <p>Overview orders</p>
+<h2 id='order-model'>Order Model</h2>
+<blockquote>
+<p>Example Order Object</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1d7986fed6"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silent Child"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.amazon.co.uk/Silent-Child-Sarah-Denzil-ebook/dp/B01MUDRSND"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amazon"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delivery-email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@sunlight.is"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T15:45:22.224Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T20:30:07.969Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T18:50:36.190Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card-cvv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card-expiration-month"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card-expiration-year"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>A order object contains the following fields</em></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><strong>string</strong></td>
+<td>The sunlight defined id representing the order.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><strong>string</strong></td>
+<td>The name of the order.</td>
+</tr>
+<tr>
+<td>url</td>
+<td><strong>string</strong></td>
+<td>Url to find out more about item or where to buy it.</td>
+</tr>
+<tr>
+<td>provider</td>
+<td><strong>string</strong></td>
+<td>Name of the provider of the item to be purchased.</td>
+</tr>
+<tr>
+<td>cost</td>
+<td><strong>integer</strong></td>
+<td>Additional costs associated with the order.</td>
+</tr>
+<tr>
+<td>price</td>
+<td><strong>integer</strong></td>
+<td>Order price.</td>
+</tr>
+<tr>
+<td>status</td>
+<td><strong>string</strong></td>
+<td>Status in which the order is found.</td>
+</tr>
+<tr>
+<td>delivery-email</td>
+<td><strong>string</strong></td>
+<td>Email of the person who will receive the order.</td>
+</tr>
+<tr>
+<td>address</td>
+<td><strong>string</strong></td>
+<td>The delivery address of the order.</td>
+</tr>
+<tr>
+<td>created-at</td>
+<td><strong>timestamp</strong></td>
+<td>The time the order was added to Sunlight.</td>
+</tr>
+<tr>
+<td>updated-at</td>
+<td><strong>timestamp</strong></td>
+<td>The time the order was updated to Sunlight.</td>
+</tr>
+<tr>
+<td>status-changed-at</td>
+<td><strong>timestamp</strong></td>
+<td>The time the order status was update to Sunlight.</td>
+</tr>
+<tr>
+<td>card-name</td>
+<td><strong>string</strong></td>
+<td>The name as displayed in the card.</td>
+</tr>
+<tr>
+<td>card-number</td>
+<td><strong>string</strong></td>
+<td>The 16 digit card number.</td>
+</tr>
+<tr>
+<td>card-cvv</td>
+<td><strong>string</strong></td>
+<td>The 3-4 digit code on the back.</td>
+</tr>
+<tr>
+<td>card-billing-address</td>
+<td><strong>string</strong></td>
+<td>The billing address associated to the card.</td>
+</tr>
+<tr>
+<td>card-expiration-month</td>
+<td><strong>string</strong></td>
+<td>The expiration month of the card</td>
+</tr>
+<tr>
+<td>card-expiration-year</td>
+<td><strong>string</strong></td>
+<td>The expiration year of the card</td>
+</tr>
+</tbody></table>
 <h2 id='list-orders'>List orders</h2>
 <blockquote>
 <p>List orders - Example</p>
