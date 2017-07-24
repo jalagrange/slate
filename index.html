@@ -295,24 +295,14 @@
 </ul>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>Authentication using HTTP basic auth.</p>
+<p>Pass a Bearer token in an Authorization header.</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
-        -u <span class="o">{</span>key<span class="o">}</span>:
-</code></pre>
-<blockquote>
-<p>Alternatively pass a Bearer token in an Authorization header.</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://person.clearbit.com/v1/people/email/alex@alexmaccaw.com'</span> <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://app.sunlight.is/endpoint'</span> <span class="se">\</span>
         -H <span class="s1">'Authorization: Bearer {key}'</span>
 </code></pre>
 <p>Authentication is done through the API key that will be provided by sunlight support.</p>
 
-<p>Requests are authenticated using HTTP Basic Auth. Provide your API key as the basic auth username. You do not need to provide a password.</p>
-
-<p>Alternatively you can also pass your API key as a bearer token in an Authorization header.</p>
-
-<p>You can see your account’s API keys, and roll them if necessary, in the dashboard.</p>
+<p>Requests are authenticated passing your API key as a bearer token in a authorization header.</p>
 <h1 id='groups'>Groups</h1>
 <p>The groups help you organize better the users in sunlight, they allow you to monitor what the members are learning and know what they are spending their sunlights.</p>
 <h2 id='group-model'>Group Model</h2>
