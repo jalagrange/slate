@@ -526,7 +526,7 @@
 <p>Invite unregistered user to Group - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
-  http://localhost:4000/api/v2/group-invitations <span class="se">\</span>
+  https://app.sunlight.is/api/v2/group-invitations <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
@@ -570,7 +570,7 @@
 <p>Invite registered user to Group - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
-  http://localhost:4000/api/v2/group-users <span class="se">\</span>
+  https://app.sunlight.is/api/v2/group-users <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
@@ -800,7 +800,7 @@
 <p>List Orders - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
-  http://localhost:4000/api/v2/orders <span class="se">\</span>
+  https://app.sunlight.is/api/v2/orders <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
@@ -882,11 +882,11 @@
     </span><span class="s2">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=0&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=2&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/orders?page[number]=2&amp;page[size]=10"</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/orders?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/orders?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/orders?page[number]=0&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/orders?page[number]=2&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/orders?page[number]=2&amp;page[size]=10"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -984,7 +984,7 @@
 <p>Activities list - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
-  http://localhost:4000/api/activities <span class="se">\</span>
+  https://app.sunlight.is/api/activities <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
@@ -1043,11 +1043,11 @@
     </span><span class="s2">"totalResults"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=0&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=2&amp;page[size]=10"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=2&amp;page[size]=10"</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/activities?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/activities?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/activities?page[number]=0&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/activities?page[number]=2&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.sunlight.is/activities?page[number]=2&amp;page[size]=10"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
