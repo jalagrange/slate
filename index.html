@@ -262,10 +262,10 @@
             <a href="#activities" class="toc-h1 toc-link" data-title="Activities">Activities</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-activities-of-a-user" class="toc-h2 toc-link" data-title="Activities">Get activities of a user</a>
+                    <a href="#activity-object" class="toc-h2 toc-link" data-title="Activities">Activity Object</a>
                   </li>
                   <li>
-                    <a href="#get-activities-of-a-group" class="toc-h2 toc-link" data-title="Activities">Get activities of a group</a>
+                    <a href="#activities-list" class="toc-h2 toc-link" data-title="Activities">Activities List</a>
                   </li>
               </ul>
           </li>
@@ -433,7 +433,7 @@
 }'</span>
 </code></pre>
 <blockquote>
-<p>The json response encoded looks like:</p>
+<p>The encoded json response looks like:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
 
@@ -546,7 +546,7 @@
 }'</span>
 </code></pre>
 <blockquote>
-<p>The json response encoded looks like:</p>
+<p>The encoded json response looks like:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
 
@@ -597,7 +597,7 @@
 }'</span>
 </code></pre>
 <blockquote>
-<p>The json response encoded looks like:</p>
+<p>The encoded json response looks like:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
 
@@ -806,7 +806,7 @@
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
-<p>The json response encoded looks like:</p>
+<p>The encoded json response looks like:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w"> 
 
@@ -927,7 +927,161 @@
 
   Every user can see all of their orders and the ones associated to the groups which said user is admin.
 </aside>
-<h1 id='activities'>Activities</h1><h2 id='get-activities-of-a-user'>Get activities of a user</h2><h2 id='get-activities-of-a-group'>Get activities of a group</h2><h1 id='errors'>Errors</h1>
+<h1 id='activities'>Activities</h1>
+<p>The activities register some actions the users make, like join a group, leave a group or buy a resource.</p>
+<h2 id='activity-object'>Activity Object</h2>
+<blockquote>
+<p>Order Object Example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a22a227b28"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"has left the Slice Group"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"track-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"leave-group"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30T01:28:37.695Z"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"subjects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"owner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2bc8066314"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"owner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gabriel Morillo"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6f2d1b48d8"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"group_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Slice Group"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><em>A activity object contains the following fields</em></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td><strong>string</strong></td>
+<td>The sunlight defined id representing the group.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><strong>text</strong></td>
+<td>Activity description.</td>
+</tr>
+<tr>
+<td>track-type</td>
+<td><strong>string</strong></td>
+<td>Type of activity.</td>
+</tr>
+<tr>
+<td>created-at</td>
+<td><strong>timestamp</strong></td>
+<td>The time the order was added to Sunlight.</td>
+</tr>
+<tr>
+<td>subjects</td>
+<td><strong>json</strong></td>
+<td>Metadata of the subjects involved in the activity.</td>
+</tr>
+</tbody></table>
+<h2 id='activities-list'>Activities List</h2>
+<blockquote>
+<p>Activities list - Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
+  http://localhost:4000/api/activities <span class="se">\</span>
+  -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>The encoded json response looks like:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activities"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c295bbaea"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0c295bbaea"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bought 'Platzi Monthly Subscription' on Platzi."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"track-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bought"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-06T20:47:21.698Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subjects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"owner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2bc8066314"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"owner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gabriel Morillo"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e67c60e651"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"order_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Platzi"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"order_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://platzi.com/comprar/mensual/?course=todos"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"resource_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e19aa8719d"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"resource_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Platzi Monthly Subscription"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/activities/0c295bbaea"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activities"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45869407dd"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45869407dd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"has joined the Slice Group Group"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"track-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"joined-group"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-30T01:28:50.978Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subjects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"owner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2bc8066314"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"owner_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gabriel Morillo"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6f2d1b48d8"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"group_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Slice Group"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/activities/45869407dd"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"totalResults"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=1&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"prev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=0&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=2&amp;page[size]=10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:4000/activities?page[number]=2&amp;page[size]=10"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>You can fetch a list of activities via a <code>GET</code> to <code>https://sunlight.is/api/activities</code> The activities list is sorted by the created-at field and by default is ordered descending, most recently created first.</p>
+
+<aside class="notice">
+  A user can view the activities of other users only if they belong to the same group.
+</aside>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page[number]</td>
+<td>no</td>
+<td>What page of results to fetch defaults to first page.</td>
+</tr>
+<tr>
+<td>page[size]</td>
+<td>no</td>
+<td>How many results per page defaults to 10, max is 50.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>no</td>
+<td>The filter query parameter is reserved for filtering data. Valid Values: <code>owner-id</code>, <code>include-friends</code></td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
 <p>The Sunlight API uses the following error codes:</p>
 
 <table><thead>
