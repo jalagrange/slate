@@ -265,7 +265,7 @@
                     <a href="#activity-object" class="toc-h2 toc-link" data-title="Activities">Activity Object</a>
                   </li>
                   <li>
-                    <a href="#activities-list" class="toc-h2 toc-link" data-title="Activities">Activities List</a>
+                    <a href="#list-activities" class="toc-h2 toc-link" data-title="Activities">List Activities</a>
                   </li>
               </ul>
           </li>
@@ -897,6 +897,12 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>You can fetch a list of orders via a <code>GET</code> to <code>https://sunlight.is/api/v2/orders</code>. The order list is sorted by the <code>updated-at</code> field and by default is ordered descending, most recently updated first.</p>
+
+<aside class="notice">
+  The scope of the orders a user can see will depend on the rol of said user.
+
+  Every user can see all of their orders and the ones associated to the groups which said user is admin.
+</aside>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -926,12 +932,6 @@
 <td>The filter query parameter is reserved for filtering data. Valid Values: <code>group-id</code>, <code>received-by</code>, <code>status</code>, <code>id</code></td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-  The scope of the orders a user can see will depend on the rol of said user.
-
-  Every user can see all of their orders and the ones associated to the groups which said user is admin.
-</aside>
 <h1 id='activities'>Activities</h1>
 <p>The activities register some actions the users make, like join a group, leave a group or buy a resource.</p>
 <h2 id='activity-object'>Activity Object</h2>
@@ -984,9 +984,9 @@
 <td>Metadata of the subjects involved in the activity.</td>
 </tr>
 </tbody></table>
-<h2 id='activities-list'>Activities List</h2>
+<h2 id='list-activities'>List Activities</h2>
 <blockquote>
-<p>Activities list - Example</p>
+<p>List Activities - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
   https://app.sunlight.is/api/activities <span class="se">\</span>
@@ -997,7 +997,9 @@
 <blockquote>
 <p>The encoded json response looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activities"</span><span class="p">,</span><span class="w">
