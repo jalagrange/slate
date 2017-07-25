@@ -932,6 +932,35 @@
 <td>The filter query parameter is reserved for filtering data. Valid Values: <code>group-id</code>, <code>received-by</code>, <code>status</code>, <code>id</code></td>
 </tr>
 </tbody></table>
+<h3 id='filters'>Filters</h3>
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Description</th>
+<th>Uri Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>Filter by order id</td>
+<td><code>/orders?filter[id]=e67c60e651</code></td>
+</tr>
+<tr>
+<td><code>group-id</code></td>
+<td>Filter by group-id</td>
+<td><code>/orders?filter[group-id]=410aff7f39</code></td>
+</tr>
+<tr>
+<td><code>received-by</code></td>
+<td>Filter by user-id who owns the order</td>
+<td><code>/orders?filter[received-by]=2bc8066314</code></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Filter by order status</td>
+<td><code>/orders?filter[status]=completed</code></td>
+</tr>
+</tbody></table>
 <h1 id='activities'>Activities</h1>
 <p>The activities register some actions the users make, like join a group, leave a group or buy a resource.</p>
 <h2 id='activity-object'>Activity Object</h2>
@@ -1097,8 +1126,13 @@
 </tr>
 </thead><tbody>
 <tr>
+<td><code>id</code></td>
+<td>Filter by activity-id</td>
+<td><code>/activities?filter[id]=0c295bbaea</code></td>
+</tr>
+<tr>
 <td><code>owner-id</code></td>
-<td>Id of the user to filter the activities</td>
+<td>Filter by user-id</td>
 <td><code>/activities?filter[owner-id]=2bc8066314</code></td>
 </tr>
 <tr>
