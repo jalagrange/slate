@@ -1081,6 +1081,25 @@
 <td>The filter query parameter is reserved for filtering data. Valid Values: <code>owner-id</code>, <code>include-friends</code></td>
 </tr>
 </tbody></table>
+<h3 id='filters'>Filters</h3>
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Description</th>
+<th>Uri Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>owner-id</code></td>
+<td>Id of the user to filter the activities</td>
+<td><code>/activities?filter[owner-id]=2bc8066314</code></td>
+</tr>
+<tr>
+<td><code>include-friends</code></td>
+<td>True if you want to include friends activities</td>
+<td><code>/activities?filter[include-friends]=true</code></td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <p>The Sunlight API uses the following error codes:</p>
 
