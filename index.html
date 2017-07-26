@@ -578,9 +578,7 @@
   https://app.sunlight.is/api/v2/group-users <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
   -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
-  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'postman-token: 648830e0-0f0e-5d35-93ab-b7fd494c8d61'</span> <span class="se">\</span>
   -d <span class="s1">'{
   "data": {
     "attributes": {
@@ -673,7 +671,73 @@
 <td>Group&#39;s id which the user will be joining</td>
 </tr>
 </tbody></table>
-<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2><h1 id='orders'>Orders</h1>
+<h2 id='edit-budget-of-an-individual-user'>Edit budget of an individual user</h2>
+<blockquote>
+<p>Edit budget of an individual user - Example</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
+  https://sunlight.is/api/credits <span class="se">\</span>
+  -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+  "data": {
+    "attributes": {
+      "amount": "100"
+    },
+    "relationships": {
+      "group-user": {
+        "data": {
+          "id": "e70099a393"
+        }
+      } 
+    }
+  }
+}'</span>
+</code></pre>
+<blockquote>
+<p>The encoded json response looks like:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transactions"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ec28e8f7c2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ec28e8f7c2"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-26T14:30:54.649Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/transactions/ec28e8f7c2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Budget is one of the ways that users in a group get sunlights, it allows groups to budget a certain amount of money they use to invest in their education.</p>
+
+<p>Can edit the budget for each member of a group individually via <code>POST</code> to<code>https://sunlight.is/api/credit</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>yes</td>
+<td>Amount of money expressed in cents.</td>
+</tr>
+<tr>
+<td>relationships[group-user][id]</td>
+<td>yes</td>
+<td><code>group-user</code> id</td>
+</tr>
+</tbody></table>
+<h1 id='orders'>Orders</h1>
 <p>Overview orders</p>
 <h2 id='order-model'>Order Model</h2>
 <blockquote>
