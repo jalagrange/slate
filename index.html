@@ -254,7 +254,7 @@
                     <a href="#order-model" class="toc-h2 toc-link" data-title="Orders">Order Model</a>
                   </li>
                   <li>
-                    <a href="#list-orders" class="toc-h2 toc-link" data-title="Orders">List Orders</a>
+                    <a href="#orders-list" class="toc-h2 toc-link" data-title="Orders">Orders List</a>
                   </li>
               </ul>
           </li>
@@ -265,7 +265,7 @@
                     <a href="#activity-object" class="toc-h2 toc-link" data-title="Activities">Activity Object</a>
                   </li>
                   <li>
-                    <a href="#list-activities" class="toc-h2 toc-link" data-title="Activities">List Activities</a>
+                    <a href="#activities-list" class="toc-h2 toc-link" data-title="Activities">Activities List</a>
                   </li>
               </ul>
           </li>
@@ -299,7 +299,7 @@
 <li><p><a href="http://jsonapi.org/format/#fetching-relationships"><strong>include</strong></a>, e.g. <code>GET /api/v2/orders?include=category</code> to include properties of the order relationship</p></li>
 <li><p><a href="http://jsonapi.org/format/#fetching-sorting"><strong>sort</strong></a>, e.g. <code>GET /api/v2/orders?sort=name</code> to sort all accounts ascending by name</p></li>
 <li><p><a href="http://jsonapi.org/format/#fetching-pagination"><strong>page</strong></a>, e.g. <code>GET /api/v2/orders?page[number]=1&amp;page[size]=10</code> to return only the first 10 orders</p></li>
-<li><p><a href="http://jsonapi.org/format/#fetching-filtering"><strong>filter</strong></a>, The <code>filter</code> is not defined by JSON API. Implementations must specify if how the <code>filter</code> query parameter is supported.</p></li>
+<li><p><a href="http://jsonapi.org/format/#fetching-filtering"><strong>filter</strong></a>, The <code>filter</code> is not defined by JSON API. Implementations must specify how the <code>filter</code> query parameter is supported.</p></li>
 </ul>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
@@ -310,9 +310,13 @@
 </code></pre>
 <p>Authentication is done through the API key that will be provided by sunlight support.</p>
 
-<p>Requests are authenticated passing your API key as a bearer token in a authorization header.</p>
+<p>Requests are authenticated passing your API key as a bearer token in an authorization header.</p>
+
+<aside class="danger">
+  Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.
+</aside>
 <h1 id='groups'>Groups</h1>
-<p>The groups help you organize better the users in sunlight, they allow you to monitor what the members are learning and know what they are spending their sunlights.</p>
+<p>The groups help you organize better the users in sunlight. They allow you to monitor what the members are learning and you can know on what they are spending their sunlights.</p>
 <h2 id='group-model'>Group Model</h2>
 <blockquote>
 <p>Example Group Object</p>
@@ -369,7 +373,7 @@
 <tr>
 <td>manager-approval</td>
 <td><strong>boolean</strong></td>
-<td>if the orders requieres manager approval</td>
+<td>If the orders requieres manager approval</td>
 </tr>
 <tr>
 <td>privacy-setting</td>
@@ -403,17 +407,17 @@
 </tr>
 </tbody></table>
 <h3 id='privacy-settings'>privacy-settings:</h3>
-<p>You can choose to allow people to join your group anytime, have them request invites or only allow them to join by an admin’s invitation.</p>
+<p>You can choose to allow people join your group at anytime, have them request invites or only allow them to join by an admin’s invitation.</p>
 
 <ul>
-<li><code>admin-invite</code>: People are joined by an invitation from the group admin <strong><em>(Avaiable)</em></strong></li>
-<li><code>public_access</code>: People can join your group anytime <strong><em>(No avaible)</em></strong></li>
-<li><code>request_invite</code>: People request invite to join a group <strong><em>(No avaible)</em></strong></li>
+<li><code>admin-invite</code>: People can only join by an invitation from a group admin <strong><em>(Avaiable)</em></strong></li>
+<li><code>public_access</code>: People can join your group at anytime <strong><em>(Not avaible)</em></strong></li>
+<li><code>request_invite</code>: People request invite to join a group <strong><em>(Not avaible)</em></strong></li>
 </ul>
 <h3 id='manager-approval'>manager-approval</h3>
 <ul>
-<li><code>true</code>: if you’d like every spending order that uses funds from this group to require approval from a group admin.</li>
-<li><code>false</code>: if you wouldn&#39;t like every spending order that uses funds from this group to require approval from a group admin.</li>
+<li><code>true</code>: if you’d like every order that uses funds from this group to require approval from a group admin.</li>
+<li><code>false</code>: if you wouldn&#39;t like every order that uses funds from this group to require approval from a group admin.</li>
 </ul>
 <h2 id='create-group'>Create group</h2>
 <blockquote>
@@ -473,7 +477,7 @@
 <p>Groups can be created via a <code>POST</code> to <code>https://sunlight.is/api/groups</code>, which accepts a JSON object describing the group.</p>
 
 <aside class="notice">
-  Note that a group will always have at least one user associated, at the time of creating a group will automatically be a member and administrator.
+  Note that a group will always have at least one user associated. At the time of creating a group, that user will automatically be a member and administrator.
 </aside>
 <h3 id='query-parameters'>Query Parameters</h3>
 <p>The table below shows the fields you can create for a group</p>
@@ -508,7 +512,7 @@
 <tr>
 <td>manager-approval</td>
 <td>no</td>
-<td>if the orders requieres manager approval</td>
+<td>If the orders require manager approval</td>
 </tr>
 <tr>
 <td>privacy-setting</td>
@@ -619,7 +623,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The groups allow you to invite registered and unregistered users in sunglight, to each case there are different params and different endpoints.</p>
+<p>The groups allow you to invite registered and unregistered users in sunlight, to each case there are different params and different endpoints.</p>
 
 <aside class="notice">
   You can only invite users to groups where you are an admin.
@@ -715,7 +719,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Budget is one of the ways that users in a group get sunlights, it allows groups to budget a certain amount of money they use to invest in their education.</p>
+<p>Budget is one way that users in a group get sunlights, it allows groups to budget a certain amount of money they use to invest in their education.</p>
 
 <p>Can edit the budget for each member of a group individually via <code>POST</code> to<code>https://sunlight.is/api/credit</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
@@ -738,7 +742,7 @@
 </tr>
 </tbody></table>
 <h1 id='orders'>Orders</h1>
-<p>Overview orders</p>
+<p>An Order is a request for a purchase of a certain Item.</p>
 <h2 id='order-model'>Order Model</h2>
 <blockquote>
 <p>Example Order Object</p>
@@ -786,7 +790,7 @@
 <tr>
 <td>url</td>
 <td><strong>string</strong></td>
-<td>Url to find out more about item or where to buy it.</td>
+<td>Url to find out more about the item or where to buy it.</td>
 </tr>
 <tr>
 <td>provider</td>
@@ -864,9 +868,9 @@
 <td>The expiration year of the card</td>
 </tr>
 </tbody></table>
-<h2 id='list-orders'>List Orders</h2>
+<h2 id='orders-list'>Orders List</h2>
 <blockquote>
-<p>List Orders - Example</p>
+<p>Orders List - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
   https://app.sunlight.is/api/v2/orders <span class="se">\</span>
@@ -1077,9 +1081,9 @@
 <td>Metadata of the subjects involved in the activity.</td>
 </tr>
 </tbody></table>
-<h2 id='list-activities'>List Activities</h2>
+<h2 id='activities-list'>Activities List</h2>
 <blockquote>
-<p>List Activities - Example</p>
+<p>Activities List - Example</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
   https://app.sunlight.is/api/activities <span class="se">\</span>
@@ -1152,10 +1156,10 @@
   </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>You can fetch a list of activities via a <code>GET</code> to <code>https://sunlight.is/api/activities</code> The activities list is sorted by the created-at field and by default is ordered descending, most recently created first.</p>
+<p>You can fetch a list of activities via a <code>GET</code> to <code>https://sunlight.is/api/activities</code> The activities list is sorted by the <code>created-at</code> field and by default is ordered descending, most recently created first.</p>
 
 <aside class="notice">
-  A user can view the activities of other users only if they belong to the same group.
+  A user can see the activities of other users only if they belong to the same group.
 </aside>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
@@ -1232,7 +1236,7 @@
 </tr>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request sucks.</td>
+<td>Bad Request -- General client error, possibly malformed data.</td>
 </tr>
 <tr>
 <td>401</td>
