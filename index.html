@@ -305,8 +305,8 @@
 <blockquote>
 <p>Pass a Bearer token in an Authorization header.</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://app.sunlight.is/endpoint'</span> <span class="se">\</span>
-        -H <span class="s1">'Authorization: Bearer {key}'</span>
+<pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl <span class="s1">'https://app.sunlight.is/api/endpoint'</span> <span class="se">\</span>
+        -H <span class="s1">'Authorization: Bearer c38e1f24a1b71ece08d29a04fa3daa7d58e71a5d58b660ae8b802732d42bf90b'</span>
 </code></pre>
 <p>Authentication is done through the API key that will be provided by sunlight support.</p>
 
@@ -316,7 +316,7 @@
   Your API keys carry many privileges, so be sure to keep them secret! Do not share your secret API keys in publicly accessible areas such GitHub, client-side code, and so forth.
 </aside>
 <h1 id='groups'>Groups</h1>
-<p>The groups help you organize better the users in sunlight. They allow you to monitor what the members are learning and you can know on what they are spending their sunlights.</p>
+<p>Groups help you organize better the users in sunlight. They allow you to monitor what the members are learning as well as know what they are spending their sunlight on.</p>
 <h2 id='group-model'>Group Model</h2>
 <blockquote>
 <p>Example Group Object</p>
@@ -373,7 +373,7 @@
 <tr>
 <td>manager-approval</td>
 <td><strong>boolean</strong></td>
-<td>If the orders requieres manager approval</td>
+<td>If the orders requires manager approval</td>
 </tr>
 <tr>
 <td>privacy-setting</td>
@@ -398,21 +398,21 @@
 <tr>
 <td>created-at</td>
 <td><strong>timestamp</strong></td>
-<td>The time the group was added to Sunlight</td>
+<td>The datetime the group was added to Sunlight</td>
 </tr>
 <tr>
 <td>updated-at</td>
 <td><strong>timestamp</strong></td>
-<td>The time the group was updated to Sunlight</td>
+<td>The datetime the group was updated to Sunlight</td>
 </tr>
 </tbody></table>
 <h3 id='privacy-settings'>privacy-settings:</h3>
 <p>You can choose to allow people join your group at anytime, have them request invites or only allow them to join by an admin’s invitation.</p>
 
 <ul>
-<li><code>admin-invite</code>: People can only join by an invitation from a group admin <strong><em>(Avaiable)</em></strong></li>
-<li><code>public_access</code>: People can join your group at anytime <strong><em>(Not avaible)</em></strong></li>
-<li><code>request_invite</code>: People request invite to join a group <strong><em>(Not avaible)</em></strong></li>
+<li><code>admin-invite</code>: People can only join by an invitation from a group admin <strong><em>(Available)</em></strong></li>
+<li><code>public_access</code>: People can join your group at anytime <strong><em>(Not available)</em></strong></li>
+<li><code>request_invite</code>: People request invite to join a group <strong><em>(Not available)</em></strong></li>
 </ul>
 <h3 id='manager-approval'>manager-approval</h3>
 <ul>
@@ -426,7 +426,7 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
   https://app.sunlight.is/api/groups <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your api key&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
   "data": {
@@ -444,7 +444,7 @@
 <blockquote>
 <p>The encoded json response looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -474,7 +474,7 @@
   </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Groups can be created via a <code>POST</code> to <code>https://sunlight.is/api/groups</code>, which accepts a JSON object describing the group.</p>
+<p>Groups can be created via a <code>POST</code> to <code>https://app.sunlight.is/api/groups</code>, which accepts a JSON object describing the group.</p>
 
 <aside class="notice">
   Note that a group will always have at least one user associated. At the time of creating a group, that user will automatically be a member and administrator.
@@ -537,7 +537,7 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
   https://app.sunlight.is/api/v2/group-invitations <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your api key&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
   "data": {
@@ -547,7 +547,7 @@
     "relationships": {
       "group": {
         "data": {
-          "id": "9030927d27" 
+          "id": "9030927d27"
         }
       }
     }
@@ -557,7 +557,7 @@
 <blockquote>
 <p>The encoded json response looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -581,7 +581,7 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
   https://app.sunlight.is/api/v2/group-users <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your api key&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
   "data": {
@@ -596,7 +596,7 @@
       },
       "group": {
         "data": {
-          "id": "9030927d27" 
+          "id": "9030927d27"
         }
       }
     }
@@ -606,7 +606,7 @@
 <blockquote>
 <p>The encoded json response looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">201</span><span class="w"> </span><span class="err">CREATED</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -629,7 +629,7 @@
   You can only invite users to groups where you are an admin.
 </aside>
 <h3 id='to-unregistered-users'>To unregistered users</h3>
-<p>via a <code>POST</code> to <code>https://sunlight.is/api/group-invitations</code>, which accepts a JSON object.</p>
+<p>via a <code>POST</code> to <code>https://app.sunlight.is/api/group-invitations</code>, which accepts a JSON object.</p>
 
 <table><thead>
 <tr>
@@ -650,7 +650,7 @@
 </tr>
 </tbody></table>
 <h3 id='to-registered-users'>To registered users</h3>
-<p>via a <code>POST</code> to <code>https://sunlight.is/api/group-users</code>, which accepts a JSON object.</p>
+<p>via a <code>POST</code> to <code>https://app.sunlight.is/api/group-users</code>, which accepts a JSON object.</p>
 
 <table><thead>
 <tr>
@@ -682,7 +682,7 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X POST <span class="se">\</span>
   https://sunlight.is/api/credits <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your api key&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   -d <span class="s1">'{
   "data": {
@@ -694,7 +694,7 @@
         "data": {
           "id": "e70099a393"
         }
-      } 
+      }
     }
   }
 }'</span>
@@ -719,9 +719,9 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Budget is one way that users in a group get sunlights, it allows groups to budget a certain amount of money they use to invest in their education.</p>
+<p>Budget is one way that users in a group get sunlight, it allows groups to budget a certain amount of money they use to invest in their education.</p>
 
-<p>Can edit the budget for each member of a group individually via <code>POST</code> to<code>https://sunlight.is/api/credit</code></p>
+<p>Can edit the budget for each member of a group individually via <code>POST</code> to<code>https://app.sunlight.is/api/credit</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -759,13 +759,7 @@
     </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T15:45:22.224Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T20:30:07.969Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T18:50:36.190Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"card-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"card-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"card-cvv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"card-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"card-expiration-month"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"card-expiration-year"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T18:50:36.190Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><em>A order object contains the following fields</em></p>
@@ -837,36 +831,6 @@
 <td><strong>timestamp</strong></td>
 <td>The time the order status was update to Sunlight.</td>
 </tr>
-<tr>
-<td>card-name</td>
-<td><strong>string</strong></td>
-<td>The name as displayed in the card.</td>
-</tr>
-<tr>
-<td>card-number</td>
-<td><strong>string</strong></td>
-<td>The 16 digit card number.</td>
-</tr>
-<tr>
-<td>card-cvv</td>
-<td><strong>string</strong></td>
-<td>The 3-4 digit code on the back.</td>
-</tr>
-<tr>
-<td>card-billing-address</td>
-<td><strong>text</strong></td>
-<td>The billing address associated to the card.</td>
-</tr>
-<tr>
-<td>card-expiration-month</td>
-<td><strong>string</strong></td>
-<td>The expiration month of the card</td>
-</tr>
-<tr>
-<td>card-expiration-year</td>
-<td><strong>string</strong></td>
-<td>The expiration year of the card</td>
-</tr>
 </tbody></table>
 <h2 id='orders-list'>Orders List</h2>
 <blockquote>
@@ -875,13 +839,13 @@
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>curl -X GET <span class="se">\</span>
   https://app.sunlight.is/api/v2/orders <span class="se">\</span>
   -H <span class="s1">'accept: application/vnd.api+json'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: Bearer &lt;your access token&gt;'</span> <span class="se">\</span>
+  -H <span class="s1">'authorization: Bearer &lt;your api key&gt;'</span> <span class="se">\</span>
   -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>The encoded json response looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -900,13 +864,7 @@
           </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
           </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-07T15:45:22.224Z"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T20:30:07.969Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T18:50:36.190Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-cvv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-expiration-month"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-expiration-year"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-16T18:50:36.190Z"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/orders/1d7986fed6"</span><span class="w">
@@ -928,13 +886,7 @@
           </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">2900</span><span class="p">,</span><span class="w">
           </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06T16:38:18.516Z"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-29T20:30:11.260Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06T16:39:38.110Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-cvv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-expiration-month"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"card-expiration-year"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="s2">"status-changed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06T16:39:38.110Z"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/orders/a5cdf56821"</span><span class="w">
@@ -964,12 +916,12 @@
   </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>You can fetch a list of orders via a <code>GET</code> to <code>https://sunlight.is/api/v2/orders</code>. The order list is sorted by the <code>updated-at</code> field and by default is ordered descending, most recently updated first.</p>
+<p>You can fetch a list of orders via a <code>GET</code> to <code>https://app.sunlight.is/api/v2/orders</code>. The order list is sorted by the <code>updated-at</code> field and by default is ordered descending, most recently updated first.</p>
 
 <aside class="notice">
-  The scope of the orders a user can see will depend on the rol of said user.
+  The scope of the orders a user can see will depend on the role of said user.
 
-  Every user can see all of their orders and the ones associated to the groups which said user is admin.
+  Every user can see all of their orders. Additionally, admins of a group can see that groups associated orders.
 </aside>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
@@ -1030,7 +982,7 @@
 </tr>
 </tbody></table>
 <h1 id='activities'>Activities</h1>
-<p>The activities register some actions the users make, like join a group, leave a group or buy a resource.</p>
+<p>The activities registers actions the users makes, like joining a group, leaving a group or buying a resource.</p>
 <h2 id='activity-object'>Activity Object</h2>
 <blockquote>
 <p>Order Object Example</p>
@@ -1094,7 +1046,7 @@
 <blockquote>
 <p>The encoded json response looks like:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w"> 
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1156,7 +1108,7 @@
   </span><span class="s2">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>You can fetch a list of activities via a <code>GET</code> to <code>https://sunlight.is/api/activities</code> The activities list is sorted by the <code>created-at</code> field and by default is ordered descending, most recently created first.</p>
+<p>You can fetch a list of activities via a <code>GET</code> to <code>https://app.sunlight.is/api/activities</code> The activities list is sorted by the <code>created-at</code> field and by default is ordered descending, by most recently created first.</p>
 
 <aside class="notice">
   A user can see the activities of other users only if they belong to the same group.
