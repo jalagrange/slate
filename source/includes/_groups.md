@@ -62,7 +62,7 @@ You can choose to allow people join your group at anytime, have them request inv
 $ curl -X POST \
   https://app.sunlight.is/api/groups \
   -H 'accept: application/vnd.api+json' \
-  -H 'authorization: Bearer <your access token>' \
+  -H 'authorization: Bearer <your api key>' \
   -H 'content-type: application/json' \
   -d '{
   "data": {
@@ -141,7 +141,7 @@ cover-url | no | Cover url of the group
 $ curl -X POST \
   https://app.sunlight.is/api/v2/group-invitations \
   -H 'accept: application/vnd.api+json' \
-  -H 'authorization: Bearer <your access token>' \
+  -H 'authorization: Bearer <your api key>' \
   -H 'content-type: application/json' \
   -d '{
   "data": {
@@ -187,7 +187,7 @@ HTTP/1.1 201 CREATED
 $ curl -X POST \
   https://app.sunlight.is/api/v2/group-users \
   -H 'accept: application/vnd.api+json' \
-  -H 'authorization: Bearer <your access token>' \
+  -H 'authorization: Bearer <your api key>' \
   -H 'content-type: application/json' \
   -d '{
   "data": {
@@ -265,7 +265,7 @@ relationships[group][id] | yes | Group's id which the user will be joining
 $ curl -X POST \
   https://sunlight.is/api/credits \
   -H 'accept: application/vnd.api+json' \
-  -H 'authorization: Bearer <your access token>' \
+  -H 'authorization: Bearer <your api key>' \
   -H 'content-type: application/json' \
   -d '{
   "data": {

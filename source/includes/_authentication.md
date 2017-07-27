@@ -3,8 +3,8 @@
 > Pass a Bearer token in an Authorization header.
 
 ```shell
-$ curl 'https://app.sunlight.is/endpoint' \
-        -H 'Authorization: Bearer {key}'
+$ curl 'https://app.sunlight.is/api/endpoint' \
+    -H 'Authorization: Bearer c38e1f24a1b71ece08d29a04fa3daa7d58e71a5d58b660ae8b802732d42bf90b'
 ```
 
 Authentication is done through the API key that will be provided by sunlight support.

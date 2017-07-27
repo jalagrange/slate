@@ -19,13 +19,7 @@ An Order is a request for a purchase of a certain Item.
     "address": null,
     "created-at": "2017-03-07T15:45:22.224Z",
     "updated-at": "2017-05-29T20:30:07.969Z",
-    "status-changed-at": "2017-03-16T18:50:36.190Z",
-    "card-name": null,
-    "card-number": null,
-    "card-cvv": null,
-    "card-billing-address": null,
-    "card-expiration-month": null,
-    "card-expiration-year": null
+    "status-changed-at": "2017-03-16T18:50:36.190Z"
   }
 ```
 
@@ -45,12 +39,12 @@ address | **string** | The delivery address of the order.
 created-at | **timestamp** | The time the order was added to Sunlight.
 updated-at | **timestamp** | The time the order was updated to Sunlight.
 status-changed-at | **timestamp** | The time the order status was update to Sunlight.
-card-name | **string** |The name as displayed in the card.
-card-number | **string** | The 16 digit card number.
-card-cvv | **string** | The 3-4 digit code on the back.
-card-billing-address | **text** | The billing address associated to the card.
-card-expiration-month | **string** | The expiration month of the card
-card-expiration-year | **string** | The expiration year of the card
+[//]: # (card-name | **string** |The name as displayed in the card.)
+[//]: # (card-number | **string** | The 16 digit card number.)
+[//]: # (card-cvv | **string** | The 3-4 digit code on the back.)
+[//]: # (card-billing-address | **text** | The billing address associated to the card.)
+[//]: # (card-expiration-month | **string** | The expiration month of the card.)
+[//]: # (card-expiration-year | **string** | The expiration year of the card.)
 
 ## Orders List
 
@@ -60,7 +54,7 @@ card-expiration-year | **string** | The expiration year of the card
 $ curl -X GET \
   https://app.sunlight.is/api/v2/orders \
   -H 'accept: application/vnd.api+json' \
-  -H 'authorization: Bearer <your access token>' \
+  -H 'authorization: Bearer <your api key>' \
   -H 'content-type: application/json' \
 ```
 
@@ -86,13 +80,7 @@ HTTP/1.1 200 OK
           "price": 123,
           "created-at": "2017-03-07T15:45:22.224Z",
           "updated-at": "2017-05-29T20:30:07.969Z",
-          "status-changed-at": "2017-03-16T18:50:36.190Z",
-          "card-name": null,
-          "card-number": null,
-          "card-cvv": null,
-          "card-billing-address": null,
-          "card-expiration-month": null,
-          "card-expiration-year": null
+          "status-changed-at": "2017-03-16T18:50:36.190Z"
         },
         "links": {
           "self": "/orders/1d7986fed6"
@@ -114,13 +102,7 @@ HTTP/1.1 200 OK
           "price": 2900,
           "created-at": "2017-03-06T16:38:18.516Z",
           "updated-at": "2017-05-29T20:30:11.260Z",
-          "status-changed-at": "2017-03-06T16:39:38.110Z",
-          "card-name": null,
-          "card-number": null,
-          "card-cvv": null,
-          "card-billing-address": null,
-          "card-expiration-month": null,
-          "card-expiration-year": null
+          "status-changed-at": "2017-03-06T16:39:38.110Z"
         },
         "links": {
           "self": "/orders/a5cdf56821"
